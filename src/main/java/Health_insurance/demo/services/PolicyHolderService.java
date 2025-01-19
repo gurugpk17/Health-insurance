@@ -12,19 +12,19 @@ import java.util.Optional;
 public class PolicyHolderService {
 
     @Autowired
-    private PolicyHolderRepo repository;
+    private PolicyHolderRepo PolicyHolderrepository;
 
     public PolicyHolder createPolicyHolder(PolicyHolder policyHolder) {
-        return repository.save(policyHolder);
+        return PolicyHolderrepository.save(policyHolder);
     }
 
     public List<PolicyHolder> getAllPolicyHolders() {
-        return repository.findAll();
+        return PolicyHolderrepository.findAll();
     }
 
     public PolicyHolder getPolicyHolderById(Long policyHolderId) {
         // Find PolicyHolder by ID, return null if not found
-        Optional<PolicyHolder> policyHolder = repository.findById(policyHolderId);
+        Optional<PolicyHolder> policyHolder = PolicyHolderrepository.findById(policyHolderId);
         return policyHolder.orElse(null);  // Return null if not found
     }
 }

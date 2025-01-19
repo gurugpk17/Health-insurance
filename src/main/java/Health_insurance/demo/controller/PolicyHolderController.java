@@ -16,7 +16,7 @@ import java.util.List;
 public class PolicyHolderController {
 
     @Autowired
-    private PolicyHolderService service;
+    private PolicyHolderService policyHolderService;
 
     // Create a new PolicyHolder
     @PostMapping
@@ -29,7 +29,7 @@ public class PolicyHolderController {
         policyHolder.setPolicyHolderPhNo(policyHolderDTO.getPolicyHolderPhNo());
 
         // Save the PolicyHolder using the service
-        service.createPolicyHolder(policyHolder);
+        policyHolderService.createPolicyHolder(policyHolder);
 
         return ResponseEntity.ok("Policy Holder created successfully!");
     }
@@ -37,6 +37,15 @@ public class PolicyHolderController {
     // Get all PolicyHolders
     @GetMapping
     public List<PolicyHolder> getAllPolicyHolders() {
-        return service.getAllPolicyHolders();
+        return policyHolderService.getAllPolicyHolders();
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getPolicyHolderById(@PathVariable Long id) {
+        PolicyHolder policyHolder = policyHolderService.getPolicyHolderById(id);
+        if (policyHolder == null) {
+            return ResponseEntity.status(404).body("PolicyHolder not found with ID " + id);
+        }
+        return ResponseEntity.ok(policyHolder.toString());
     }
 }
