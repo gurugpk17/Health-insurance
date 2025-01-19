@@ -2,6 +2,7 @@ package Health_insurance.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class PolicyHolder {
@@ -15,6 +16,10 @@ public class PolicyHolder {
     private String policyHolderGender;
     private String policyHolderAddress;
     private String policyHolderPhNo;
+
+    // Relationship with Relationship model
+    @OneToMany(mappedBy = "policyHolder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Relationship> relationships;
 
     // Getters and Setters
     public Long getPolicyHolderId() {
@@ -63,5 +68,14 @@ public class PolicyHolder {
 
     public void setPolicyHolderPhNo(String policyHolderPhNo) {
         this.policyHolderPhNo = policyHolderPhNo;
+    }
+
+    // Getter and Setter for relationships
+    public List<Relationship> getRelationships() {
+        return relationships;
+    }
+
+    public void setRelationships(List<Relationship> relationships) {
+        this.relationships = relationships;
     }
 }

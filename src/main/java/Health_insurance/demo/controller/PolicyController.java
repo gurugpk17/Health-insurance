@@ -14,9 +14,7 @@ import Health_insurance.demo.model.PolicyRenewal;
 import Health_insurance.demo.services.PolicyService;
 import Health_insurance.demo.services.PolicyHolderService;
 
-
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/policies")
@@ -55,12 +53,12 @@ public class PolicyController {
 
     // 3. Get a policy by ID
     @GetMapping("/{id}")
-    public ResponseEntity<String> getPolicyById(@PathVariable Long id) {
+    public ResponseEntity<?> getPolicyById(@PathVariable Long id) {
         Policy policy = policyService.getPolicyById(id);
         if (policy == null) {
             return ResponseEntity.status(404).body("Policy not found with ID " + id);
         }
-        return ResponseEntity.ok(policy.toString());
+        return ResponseEntity.ok(policy);
     }
 
     // 4. Create a renewal for a policy
