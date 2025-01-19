@@ -1,10 +1,12 @@
 package Health_insurance.demo.services;
 
-import Health_insurance.demo.model.Policy;
-import Health_insurance.demo.dao.PolicyRepo;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import Health_insurance.demo.model.Policy;
+import Health_insurance.demo.model.PolicyRenewal;
+import Health_insurance.demo.dao.PolicyRepo;
+import Health_insurance.demo.dao.PolicyRenewalRepo;
 
 import java.util.List;
 
@@ -12,20 +14,24 @@ import java.util.List;
 public class PolicyService {
 
     @Autowired
-    private PolicyRepo policyRepo;
+    private PolicyRepo policyRepository;
 
-    // Save a policy
-    public Policy savePolicy(Policy policy) {
-        return policyRepo.save(policy);
+    @Autowired
+    private PolicyRenewalRepo policyRenewalRepository;
+
+    public void savePolicy(Policy policy) {
+        policyRepository.save(policy);
     }
 
-    // Fetch all policies
-    public List<Policy> getAllPolicies() {
-        return policyRepo.findAll();
-    }
-
-    // Find a policy by ID
     public Policy getPolicyById(Long id) {
-        return policyRepo.findById(id).orElse(null);
+        return policyRepository.findById(id).orElse(null);
+    }
+
+    public List<Policy> getAllPolicies() {
+        return policyRepository.findAll();
+    }
+
+    public void saveRenewal(PolicyRenewal renewal) {
+        policyRenewalRepository.save(renewal);
     }
 }

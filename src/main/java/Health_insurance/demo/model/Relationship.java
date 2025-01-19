@@ -67,5 +67,4 @@ public class Relationship {
     @JoinColumn(name = "policyHolderId", nullable = false)
     private PolicyHolder policyHolder;
 
-    // Getters and Setters
 }
